@@ -1,18 +1,29 @@
-import React from "react";
+// src/components/SearchBar.jsx
+import React, { useState } from "react";
+import useRecipeStore from "../store";
 
-function SearchBar({ searchTerm, setSearchTerm, handleSearch }) {
+function SearchBar() {
+  const [input, setInput] = useState("");
+  const { setSearchTerm } = useRecipeStore();
+
+  const handleSearch = () => {
+    if (input.trim()) {
+      setSearchTerm(input);
+    }
+  };
+
   return (
-    <div className="flex justify-center my-6">
+    <div className="flex justify-center mb-6">
       <input
         type="text"
-        placeholder="Search for a meal..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        className="w-1/2 p-3 border rounded-l-lg shadow-md focus:outline-none focus:ring-2 focus:ring-green-400"
+        placeholder="Search recipes..."
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+        className="border border-gray-300 rounded-l-md px-4 py-2 w-64"
       />
       <button
         onClick={handleSearch}
-        className="bg-green-500 hover:bg-green-600 text-white px-5 rounded-r-lg shadow-md transition duration-200"
+        className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-r-md shadow-md"
       >
         Search
       </button>
