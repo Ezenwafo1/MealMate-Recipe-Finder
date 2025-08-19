@@ -1,38 +1,44 @@
 import React, { useState, useEffect } from "react";
+import SearchBar from "./SearchBar";
+import RecipeCard from "./RecipeCard";
+import RecipeDetails from "./RecipeDetails";
 
 function Recipe() {
   const [recipes, setRecipes] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [expandedId, setExpandedId] = useState(null);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
-    fetch("https://www.themealdb.com/api/json/v1/1/search.php?s=")
+    fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`)
       .then((res) => res.json())
       .then((data) => {
-        if (data.meals) {
-          setRecipes(data.meals);
-        }
+        setRecipes(data.meals || []);
+        setLoading(false);
       })
-      .catch((error) => console.error("Error fetching recipes:", error));
-  }, []);
+      .catch((err) => console.error(err));
+  }, [search]);
+
+  const toggleExpand = (id) => {
+    setExpandedId(expandedId === id ? null : id);
+  };
+
+  if (loading)
+    return (
+      <p className="text-center text-gray-500 mt-10">Loading recipes...</p>
+    );
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-4">
-      {recipes.length > 0 ? (
-        recipes.map((meal) => (
-          <div
-            key={meal.idMeal}
-            className="border rounded-xl shadow-md overflow-hidden"
-          >
-            <img
-              src={meal.strMealThumb}
-              alt={meal.strMeal}
-              className="w-full h-48 object-cover"
-            />
-            <h3 className="text-lg font-semibold p-2">{meal.strMeal}</h3>
+    <div>
+      <SearchBar search={search} setSearch={setSearch} />
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {recipes.map((meal) => (
+          <div key={meal.idMeal}>
+            <RecipeCard meal={meal} toggleExpand={toggleExpand} />
+            {expandedId === meal.idMeal && <RecipeDetails meal={meal} />}
           </div>
-        ))
-      ) : (
-        <p className="text-center col-span-full">Loading recipes...</p>
-      )}
+        ))}
+      </div>
     </div>
   );
 }

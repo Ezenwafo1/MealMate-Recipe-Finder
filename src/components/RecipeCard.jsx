@@ -1,23 +1,18 @@
-// src/components/RecipeCard.jsx
 import React from "react";
-import useRecipeStore from "../store";
 
-function RecipeCard({ recipe }) {
-  const { setSelectedRecipe } = useRecipeStore();
-
+function RecipeCard({ meal, toggleExpand }) {
   return (
     <div
-      onClick={() => setSelectedRecipe(recipe)}
-      className="bg-white shadow-md rounded-lg overflow-hidden cursor-pointer hover:shadow-lg transition"
+      className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow cursor-pointer"
+      onClick={() => toggleExpand(meal.idMeal)}
     >
       <img
-        src={recipe.strMealThumb}
-        alt={recipe.strMeal}
-        className="w-full h-40 object-cover"
+        src={meal.strMealThumb}
+        alt={meal.strMeal}
+        className="w-full h-48 object-cover"
       />
       <div className="p-4">
-        <h2 className="text-lg font-semibold">{recipe.strMeal}</h2>
-        <p className="text-sm text-gray-500">{recipe.strArea}</p>
+        <h2 className="font-bold text-lg mb-2">{meal.strMeal}</h2>
       </div>
     </div>
   );

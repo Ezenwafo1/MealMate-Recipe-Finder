@@ -1,38 +1,23 @@
-import React, { useState, useEffect } from "react";
-import SearchBar from "../components/SearchBar";
-import RecipeList from "../components/RecipeList";
+import React from "react";
+import Recipe from "./Recipe";
 
 function HomePage() {
-  const [searchTerm, setSearchTerm] = useState("chicken");
-  const [recipes, setRecipes] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    const fetchRecipes = async () => {
-      setLoading(true);
-      try {
-        const res = await fetch(
-          `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchTerm}`
-        );
-        const data = await res.json();
-        setRecipes(data.meals || []);
-      } catch (error) {
-        console.error("Error fetching recipes:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchRecipes();
-  }, [searchTerm]);
-
   return (
-    <div className="max-w-6xl mx-auto px-4 py-10">
-      <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+    <div className="min-h-screen bg-gray-100 flex flex-col items-center py-10">
+      {/* Hero / Welcome Section */}
+      <div className="text-center mb-10">
+        <h1 className="text-5xl font-extrabold text-green-600 mb-4">
+          🍲 Welcome to MealMate
+        </h1>
+        <p className="text-gray-700 text-lg max-w-xl mx-auto">
+          Discover delicious recipes from all over the world. Search, explore, and enjoy!
+        </p>
+      </div>
 
-      {loading && <p className="text-center text-gray-500">Loading recipes...</p>}
-
-      <RecipeList recipes={recipes} />
+      {/* Recipe Component */}
+      <div className="w-full max-w-6xl px-4">
+        <Recipe />
+      </div>
     </div>
   );
 }
