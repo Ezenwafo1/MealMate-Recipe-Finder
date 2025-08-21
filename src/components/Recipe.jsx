@@ -1,44 +1,47 @@
 import React, { useState, useEffect } from "react";
-import SearchBar from "./SearchBar";
 import RecipeCard from "./RecipeCard";
-import RecipeDetails from "./RecipeDetails";
 
-function Recipe() {
+function Recipe({ category }) {
   const [recipes, setRecipes] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [expandedId, setExpandedId] = useState(null);
-  const [search, setSearch] = useState("");
 
   useEffect(() => {
-    fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setRecipes(data.meals || []);
-        setLoading(false);
-      })
-      .catch((err) => console.error(err));
-  }, [search]);
+    const fetchRecipes = async () => {
+      try {
+        // Step 1: Fetch list of meals by category or all meals
+        const url = category
+          ? `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`
+          : `https://www.themealdb.com/api/json/v1/1/search.php?s=`;
+        const res = await fetch(url);
+        const data = await res.json();
+        const meals = data.meals || [];
+
+        // Step 2: Fetch full details for each meal
+        const detailedMeals = await Promise.all(
+          meals.map(async (meal) => {
+            const detailRes = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${meal.idMeal}`);
+            const detailData = await detailRes.json();
+            return detailData.meals[0]; // full meal details
+          })
+        );
+
+        setRecipes(detailedMeals);
+      } catch (error) {
+        console.error("Error fetching recipes:", error);
+      }
+    };
+    fetchRecipes();
+  }, [category]);
 
   const toggleExpand = (id) => {
     setExpandedId(expandedId === id ? null : id);
   };
 
-  if (loading)
-    return (
-      <p className="text-center text-gray-500 mt-10">Loading recipes...</p>
-    );
-
   return (
-    <div>
-      <SearchBar search={search} setSearch={setSearch} />
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {recipes.map((meal) => (
-          <div key={meal.idMeal}>
-            <RecipeCard meal={meal} toggleExpand={toggleExpand} />
-            {expandedId === meal.idMeal && <RecipeDetails meal={meal} />}
-          </div>
-        ))}
-      </div>
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      {recipes.map((meal) => (
+        <RecipeCard key={meal.idMeal} meal={meal} isExpanded={expandedId === meal.idMeal} toggleExpand={toggleExpand} />
+      ))}
     </div>
   );
 }
