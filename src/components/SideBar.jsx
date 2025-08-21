@@ -1,45 +1,41 @@
-import React, { useState } from "react";
-import { useAppContext } from "../App";
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
+import { useAppContext } from "../context/AppContext.jsx";
 
 function SideBar() {
-  const { favorites, shoppingList } = useAppContext();
-  const [open, setOpen] = useState(false);
+  const { filterQuery, setFilterQuery } = useAppContext();
+  const location = useLocation();
+  const onHome = location.pathname === "/";
 
   return (
-    <div className={`fixed top-16 right-0 h-[80vh] w-64 bg-white dark:bg-gray-800 shadow-lg rounded-l-lg p-4 transform transition-transform duration-300 ${open ? "translate-x-0" : "translate-x-full"}`}>
-      <button
-        className="absolute -left-8 top-0 bg-green-500 dark:bg-green-600 text-white px-2 py-1 rounded-l transition-colors duration-300"
-        onClick={() => setOpen(!open)}
-      >
-        {open ? "Close" : "Open"}
-      </button>
+    <aside className="w-64 shrink-0 h-screen sticky top-0 border-r border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4">
+      <Link to="/" className="block text-2xl font-extrabold text-green-600 mb-6">
+        🍲 MealMate
+      </Link>
 
-      <h2 className="font-bold text-lg mb-2">Favorites ❤️</h2>
-      {favorites.length ? (
-        <ul className="mb-4">
-          {favorites.map((id) => (
-            <li key={id} className="text-sm border-b border-gray-200 dark:border-gray-700 py-1">
-              Recipe ID: {id}
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">No favorites yet</p>
-      )}
+      {/* Search (works on any page, but most useful on Home) */}
+      <label className="text-sm font-medium block mb-2">Search recipes</label>
+      <input
+        type="text"
+        value={filterQuery}
+        onChange={(e) => setFilterQuery(e.target.value)}
+        placeholder="e.g. chicken, pasta"
+        className="w-full px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 outline-none focus:ring-2 focus:ring-green-500"
+      />
 
-      <h2 className="font-bold text-lg mb-2">Shopping List 🛒</h2>
-      {shoppingList.length ? (
-        <ul>
-          {shoppingList.map((item, index) => (
-            <li key={index} className="text-sm border-b border-gray-200 dark:border-gray-700 py-1">
-              {item}
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p className="text-sm text-gray-500 dark:text-gray-400">No items yet</p>
-      )}
-    </div>
+      <nav className="mt-6 space-y-2">
+        <Link
+          to="/"
+          className={`block px-3 py-2 rounded-md ${
+            onHome
+              ? "bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-200"
+              : "hover:bg-gray-100 dark:hover:bg-gray-700"
+          }`}
+        >
+          Home
+        </Link>
+      </nav>
+    </aside>
   );
 }
 

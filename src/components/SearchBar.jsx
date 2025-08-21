@@ -1,14 +1,17 @@
 import React from "react";
+import { useAppContext } from "../App";
 
-function SearchBar({ search, setSearch }) {
+function SearchBar() {
+  const { searchQuery, setSearchQuery } = useAppContext();
+
   return (
     <div className="mb-6">
       <input
         type="text"
         placeholder="Search recipes..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        className="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500 dark:bg-gray-700 dark:text-gray-100"
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        className="w-full p-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500"
       />
     </div>
   );
