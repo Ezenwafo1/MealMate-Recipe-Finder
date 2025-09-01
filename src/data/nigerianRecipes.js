@@ -1,4 +1,5 @@
-export const nigerianRecipes = [
+
+export const recipes = [
   {
     id: 1,
     name: "Enugu Abacha",
