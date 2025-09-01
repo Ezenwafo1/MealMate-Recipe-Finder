@@ -1,101 +1,61 @@
-import React, { useState, useEffect } from "react";
-import { Routes, Route, Navigate, Link, useNavigate } from "react-router-dom";
-import LoginForm from "./components/LoginForm";
-import SignUpForm from "./components/SignUpForm";
-import AddRecipeForm from "./components/AddRecipeForm";
-import RecipeList from "./components/RecipeList";
-import DarkModeToggle from "./components/DarkModeToggle";
-import Footer from "./components/Footer";
-import { recipes as initialRecipes } from "./data/recipes";
-import { users as initialUsers } from "./data/users";
+import React, { useState } from "react";
+import RecipeList from "./components/RecipeList.jsx";
 
-// ✅ Protected Route component
-const ProtectedRoute = ({ user, children }) => {
-  if (!user || !user.verified) return <Navigate to="/login" replace />;
-  return children;
-};
-
-const App = () => {
-  const [recipesData, setRecipesData] = useState(initialRecipes);
-  const [users, setUsers] = useState(initialUsers);
-  const [user, setUser] = useState(
-    JSON.parse(localStorage.getItem("mealMateUser")) || null
-  );
-
-  const navigate = useNavigate();
-
-  // ✅ Add new recipe
-  const handleAddRecipe = (newRecipe) => {
-    setRecipesData([newRecipe, ...recipesData]);
-  };
-
-  // ✅ Community Sign-Up
-  const handleSignUp = (newUser) => {
-    setUsers([...users, newUser]);
-    alert("Your account is submitted! Wait for admin verification.");
-    navigate("/login");
-  };
-
-  // ✅ Login persistence
-  useEffect(() => {
-    if (user) {
-      localStorage.setItem("mealMateUser", JSON.stringify(user));
-    } else {
-      localStorage.removeItem("mealMateUser");
-    }
-  }, [user]);
+function App() {
+  const [query, setQuery] = useState("");
+  const [showNigerian, setShowNigerian] = useState(true);
+  const [showWestAfrican, setShowWestAfrican] = useState(false);
+  const [showInternational, setShowInternational] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100">
-      <header className="flex justify-between items-center p-4 shadow-md bg-white dark:bg-gray-900">
-        <h1 className="text-2xl font-bold">MealMate</h1>
-        <div className="flex gap-2">
-          <DarkModeToggle />
-          {user ? (
-            <button
-              onClick={() => setUser(null)}
-              className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-700 transition"
-            >
-              Logout
-            </button>
-          ) : (
-            <>
-              <Link
-                to="/login"
-                className="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 transition"
-              >
-                Login
-              </Link>
-              <Link
-                to="/signup"
-                className="bg-yellow-400 text-white px-3 py-1 rounded hover:bg-yellow-500 transition"
-              >
-                Join Community
-              </Link>
-            </>
-          )}
-        </div>
-      </header>
+    <div className="container mx-auto p-4">
+      <h1 className="text-2xl font-bold mb-4">MealMate Recipe Finder</h1>
 
-      <main className="p-4">
-        <Routes>
-          <Route path="/" element={<RecipeList recipes={recipesData} />} />
-          <Route path="/login" element={<LoginForm onLogin={setUser} />} />
-          <Route path="/signup" element={<SignUpForm onSignUp={handleSignUp} />} />
-          <Route
-            path="/add-recipe"
-            element={
-              <ProtectedRoute user={user}>
-                <AddRecipeForm onSubmit={handleAddRecipe} />
-              </ProtectedRoute>
-            }
+      <input
+        type="text"
+        placeholder="Search international recipes..."
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        className="border p-2 w-full mb-4"
+      />
+
+      <div className="flex gap-4 mb-4">
+        <label className="flex items-center gap-2">
+          <input
+            type="checkbox"
+            checked={showNigerian}
+            onChange={() => setShowNigerian(!showNigerian)}
           />
-        </Routes>
-      </main>
+          Nigerian Recipes
+        </label>
 
-      <Footer />
+        <label className="flex items-center gap-2">
+          <input
+            type="checkbox"
+            checked={showWestAfrican}
+            onChange={() => setShowWestAfrican(!showWestAfrican)}
+          />
+          West African Recipes
+        </label>
+
+        <label className="flex items-center gap-2">
+          <input
+            type="checkbox"
+            checked={showInternational}
+            onChange={() => setShowInternational(!showInternational)}
+          />
+          International Recipes
+        </label>
+      </div>
+
+      <RecipeList
+        query={query}
+        showNigerian={showNigerian}
+        showWestAfrican={showWestAfrican}
+        showInternational={showInternational}
+      />
     </div>
   );
-};
+}
 
 export default App;
