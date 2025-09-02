@@ -1,65 +1,109 @@
-import React from "react";
+// src/components/RecipeDetails.jsx
+import React, { useState } from "react";
+import { useParams, Link } from "react-router-dom";
+import { recipes } from "../data/recipes";
 
-function RecipeDetails({ recipe }) {
-  // Badge colors based on subCategory
-  const badgeColors = {
-    Snack: "bg-yellow-200 text-yellow-800",
-    Lunch: "bg-orange-200 text-orange-800",
-    Dinner: "bg-red-200 text-red-800",
-    Smoothie: "bg-green-200 text-green-800",
-    Default: "bg-gray-200 text-gray-800"
-  };
+function RecipeDetails() {
+  const { id } = useParams();
+  const recipe =
+    recipes.find((r) => r.id === parseInt(id)) || null;
 
-  const badgeClass = badgeColors[recipe.subCategory] || badgeColors.Default;
+  const [showDetails, setShowDetails] = useState(false);
+
+  if (!recipe) return <p className="text-center mt-8">Recipe not found</p>;
 
   return (
-    <div className="border rounded-xl shadow-lg p-4 bg-white transition-colors duration-300 hover:shadow-xl">
-      {/* Recipe Image */}
+    <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-6 mt-6">
+      {/* Always visible section */}
       <img
-        src={recipe.thumbnail}
-        alt={recipe.name}
-        className="w-full h-48 sm:h-56 object-cover rounded-lg mb-3"
+        src={recipe.image || recipe.strMealThumb}
+        alt={recipe.name || recipe.strMeal}
+        className="w-full h-64 object-cover rounded-lg mb-4"
       />
-
-      {/* Recipe Title */}
-      <h2 className="text-xl sm:text-2xl font-semibold mb-1 hover:text-orange-500 transition-colors duration-300 cursor-pointer">
-        {recipe.name}
-      </h2>
-
-      {/* Badge + Category */}
-      <div className="flex items-center gap-2 mb-2">
-        <span className={`px-2 py-1 rounded-full text-xs font-semibold ${badgeClass}`}>
-          {recipe.subCategory}
-        </span>
-        <span className="text-sm italic text-gray-600">{recipe.category}</span>
-      </div>
-
-      {/* Ingredients */}
-      <p className="text-sm sm:text-base mb-2">
-        <strong>Ingredients:</strong> {recipe.ingredients.join(", ")}
+      <h1 className="text-2xl font-bold text-gray-800">
+        {recipe.name || recipe.strMeal}
+      </h1>
+      <p className="text-gray-600 mt-2">
+        {recipe.subcategory || recipe.strCategory}
       </p>
 
-      {/* Instructions */}
-      <p className="text-sm sm:text-base mb-2">
-        <strong>Instructions:</strong> {recipe.instructions}
-      </p>
+      {/* Toggle button */}
+      <button
+        onClick={() => setShowDetails(!showDetails)}
+        className="mt-4 px-6 py-2 rounded-lg bg-green-700 text-white hover:bg-green-800 transition"
+      >
+        {showDetails ? "Hide Details" : "More Details"}
+      </button>
 
-      {/* Nutrition in Green */}
-      <p className="text-sm sm:text-base mb-2 text-green-600">
-        <strong>Nutrition:</strong> {recipe.nutrition.calories} cal, {recipe.nutrition.protein}g protein, {recipe.nutrition.carbs}g carbs, {recipe.nutrition.fats}g fats
-      </p>
+      {/* Conditionally visible details */}
+      {showDetails && (
+        <div className="mt-6 space-y-4">
+          <div>
+            <h2 className="text-lg font-semibold">Instructions</h2>
+            <p className="text-gray-700 mt-2">{recipe.instructions || recipe.strInstructions}</p>
+          </div>
 
-      {/* Video Link */}
-      {recipe.videoUrl && (
-        <a
-          href={recipe.videoUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-orange-500 font-semibold hover:underline"
-        >
-          Watch Video
-        </a>
+          <div>
+            <h2 className="text-lg font-semibold">Ingredients</h2>
+            <ul className="list-disc list-inside text-gray-700 mt-2">
+              {(recipe.ingredients ||
+                recipe.strIngredient1) && (
+                <>
+                  {recipe.ingredients
+                    ? recipe.ingredients.map((ing, idx) => (
+                        <li key={idx}>{ing}</li>
+                      ))
+                    : [...Array(20).keys()]
+                        .map((i) => recipe[`strIngredient${i + 1}`])
+                        .filter(Boolean)
+                        .map((ing, idx) => (
+                          <li key={idx}>{ing}</li>
+                        ))}
+                </>
+              )}
+            </ul>
+          </div>
+
+          <div>
+            <h2 className="text-lg font-semibold">Nutrition</h2>
+            {recipe.nutrition ? (
+              <ul className="list-disc list-inside text-gray-700 mt-2">
+                {Object.entries(recipe.nutrition).map(([key, value], idx) => (
+                  <li key={idx}>
+                    {key}: {value}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-gray-600">Nutrition info not available</p>
+            )}
+          </div>
+
+          {recipe.videoUrl || recipe.strYoutube ? (
+            <div>
+              <h2 className="text-lg font-semibold">Video</h2>
+              <a
+                href={recipe.videoUrl || recipe.strYoutube}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:underline"
+              >
+                Watch Recipe Video
+              </a>
+            </div>
+          ) : null}
+        </div>
       )}
+
+      {/* Back button */}
+      <div className="mt-6">
+        <Link
+          to="/"
+          className="text-gray-700 hover:underline"
+        >
+          ← Back to Recipes
+        </Link>
+      </div>
     </div>
   );
 }

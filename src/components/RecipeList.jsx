@@ -1,5 +1,5 @@
 import React from "react";
-import RecipeDetails from "./RecipeDetails.jsx";
+import RecipeCard from "./RecipeCard.jsx"; // ⬅️ use the card in the grid
 import { recipes as localNigerianRecipes } from "../data/nigerianRecipes.js";
 import { westAfricanRecipes } from "../data/westAfricanRecipes.js";
 import { useInternational } from "../hooks/useInternational.js";
@@ -18,8 +18,11 @@ function RecipeList({ showNigerian, showWestAfrican, showInternational }) {
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {allRecipes.map((recipe) => (
-        <RecipeDetails key={recipe.id} recipe={recipe} />
+      {allRecipes.map((recipe, idx) => (
+        <RecipeCard
+          key={recipe.id || recipe.idMeal || `${recipe.name || recipe.strMeal}-${idx}`}
+          recipe={recipe}
+        />
       ))}
     </div>
   );

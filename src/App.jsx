@@ -19,31 +19,40 @@ function App() {
       <main className="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-6">
         {/* Toggle Checkboxes */}
         <div className="flex flex-col sm:flex-row sm:justify-center gap-3 mb-6">
-          <label className="flex items-center gap-2">
+          <label className="flex items-center gap-2 cursor-pointer">
             <input
               type="checkbox"
               checked={showNigerian}
               onChange={() => setShowNigerian(!showNigerian)}
+              className="h-5 w-5 text-green-800 focus:ring-green-700 rounded cursor-pointer"
             />
-            Nigerian Recipes
+            <span className="text-green-900 font-medium hover:text-green-700 transition">
+              Nigerian Recipes
+            </span>
           </label>
 
-          <label className="flex items-center gap-2">
+          <label className="flex items-center gap-2 cursor-pointer">
             <input
               type="checkbox"
               checked={showWestAfrican}
               onChange={() => setShowWestAfrican(!showWestAfrican)}
+              className="h-5 w-5 text-green-800 focus:ring-green-700 rounded cursor-pointer"
             />
-            West African Recipes
+            <span className="text-green-900 font-medium hover:text-green-700 transition">
+              West African Recipes
+            </span>
           </label>
 
-          <label className="flex items-center gap-2">
+          <label className="flex items-center gap-2 cursor-pointer">
             <input
               type="checkbox"
               checked={showInternational}
               onChange={() => setShowInternational(!showInternational)}
+              className="h-5 w-5 text-green-800 focus:ring-green-700 rounded cursor-pointer"
             />
-            International Recipes
+            <span className="text-green-900 font-medium hover:text-green-700 transition">
+              International Recipes
+            </span>
           </label>
         </div>
 
@@ -56,12 +65,12 @@ function App() {
       </main>
 
       {/* Footer */}
-      {/* Footer */}
-<footer className="bg-green-900 text-gray-100 py-4 text-center mt-6">
-  <p className="text-sm">
-    &copy; {new Date().getFullYear()} MealMate. Designed with ❤️ by Ezenwafo1. Powered by ALXFE
-  </p>
-</footer>
+      <footer className="bg-green-900 text-gray-100 py-4 text-center mt-6">
+        <p className="text-sm">
+          &copy; {new Date().getFullYear()} MealMate. Designed with ❤️ by
+          Ezenwafo1. Powered by ALXFE
+        </p>
+      </footer>
     </div>
   );
 }
