@@ -1,6 +1,8 @@
+// src/App.jsx
 import React, { useState } from "react";
 import RecipeList from "./components/RecipeList.jsx";
 import { GiMeal } from "react-icons/gi"; // Import logo icon
+import Footer from "./components/Footer.jsx"; // ✅ Import Footer component
 
 function App() {
   const [showNigerian, setShowNigerian] = useState(true);
@@ -66,13 +68,8 @@ function App() {
         />
       </main>
 
-      {/* Footer */}
-      <footer className="bg-green-900 text-gray-100 py-4 text-center mt-6">
-        <p className="text-sm">
-          &copy; {new Date().getFullYear()} MealMate. Designed with ❤️ by
-          Ezenwafo1. Powered by ALXFE
-        </p>
-      </footer>
+      {/* Footer with icons */}
+      <Footer />
     </div>
   );
 }
