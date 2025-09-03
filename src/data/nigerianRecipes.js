@@ -1,3 +1,10 @@
+// src/data/nigerianRecipes.js
+import abachaImg from "../assets/images/nigeria/abacha.jpg";
+import tuwoImg from "../assets/images/nigeria/tuwo.jpg";
+import ofeAnyaraImg from "../assets/images/nigeria/ofe-anyara.jpg";
+import ugbaImg from "../assets/images/nigeria/ugba.jpg";
+import moiMoiImg from "../assets/images/nigeria/moi-moi.jpg";
+import asaroImg from "../assets/images/nigeria/asaro.jpg";
 
 export const recipes = [
   {
@@ -7,7 +14,7 @@ export const recipes = [
     subCategory: "Snack",
     ingredients: ["African salad (Abacha)", "Ugba", "Palm oil", "Ground crayfish", "Pepper", "Onions"],
     instructions: "Soak Abacha in warm water. Mix with ugba, palm oil, crayfish, pepper, and onions. Serve cold.",
-    thumbnail: "https://example.com/abacha.jpg",
+    thumbnail: abachaImg,
     videoUrl: "https://youtube.com/watch?v=abc123",
     nutrition: { calories: 350, protein: 8, carbs: 45, fats: 15 },
   },
@@ -18,7 +25,7 @@ export const recipes = [
     subCategory: "Lunch",
     ingredients: ["Rice flour", "Water", "Soup of choice"],
     instructions: "Boil water and slowly stir in rice flour to form a thick paste. Serve with soup.",
-    thumbnail: "https://example.com/tuwo.jpg",
+    thumbnail: tuwoImg,
     videoUrl: "https://youtube.com/watch?v=def456",
     nutrition: { calories: 400, protein: 6, carbs: 85, fats: 2 },
   },
@@ -29,7 +36,7 @@ export const recipes = [
     subCategory: "Dinner",
     ingredients: ["Cocoyam paste", "Anyara (local leaves)", "Palm oil", "Meat", "Seasoning cubes"],
     instructions: "Boil cocoyam and pound into paste. Cook anyara leaves with palm oil and meat. Mix with paste and serve.",
-    thumbnail: "https://example.com/ofe-anyara.jpg",
+    thumbnail: ofeAnyaraImg,
     videoUrl: "https://youtube.com/watch?v=ghi789",
     nutrition: { calories: 450, protein: 15, carbs: 30, fats: 25 },
   },
@@ -40,7 +47,7 @@ export const recipes = [
     subCategory: "Snack",
     ingredients: ["Ugba", "Palm oil", "Pepper", "Onions", "Seasoning"],
     instructions: "Mix ugba with palm oil, pepper, onions, and seasoning. Serve with roasted yam.",
-    thumbnail: "https://example.com/ugba.jpg",
+    thumbnail: ugbaImg,
     videoUrl: "https://youtube.com/watch?v=jkl012",
     nutrition: { calories: 300, protein: 10, carbs: 20, fats: 18 },
   },
@@ -51,7 +58,7 @@ export const recipes = [
     subCategory: "Lunch",
     ingredients: ["Beans", "Onions", "Bell peppers", "Palm oil", "Seasoning"],
     instructions: "Blend beans with onions and bell peppers. Steam with palm oil and seasoning until cooked.",
-    thumbnail: "https://example.com/moi-moi.jpg",
+    thumbnail: moiMoiImg,
     videoUrl: "https://youtube.com/watch?v=mno345",
     nutrition: { calories: 400, protein: 20, carbs: 35, fats: 12 },
   },
@@ -62,7 +69,7 @@ export const recipes = [
     subCategory: "Dinner",
     ingredients: ["Yam", "Palm oil", "Tomatoes", "Onions", "Pepper", "Seasoning", "Spinach"],
     instructions: "Cook yam cubes in palm oil, tomatoes, onions, and pepper. Add spinach and seasoning and simmer until done.",
-    thumbnail: "https://example.com/asaro.jpg",
+    thumbnail: asaroImg,
     videoUrl: "https://youtube.com/watch?v=pqr678",
     nutrition: { calories: 500, protein: 8, carbs: 65, fats: 18 },
   }

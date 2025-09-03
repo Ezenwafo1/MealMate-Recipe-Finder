@@ -1,3 +1,11 @@
+// src/data/westAfricanRecipes.js
+import jollofImg from '../assets/images/west-africa/jollof.jpg';
+import egusiImg from '../assets/images/west-africa/egusi.jpg';
+import waakyeImg from '../assets/images/west-africa/waakye.jpg';
+import fufuLightSoupImg from '../assets/images/west-africa/fufu-light-soup.jpg';
+import keleweleImg from '../assets/images/west-africa/kelewele.jpg';
+import bitterleafImg from '../assets/images/west-africa/bitterleaf.jpg';
+
 export const westAfricanRecipes = [
   {
     id: 101,
@@ -6,7 +14,7 @@ export const westAfricanRecipes = [
     subCategory: "Lunch",
     ingredients: ["Rice", "Tomatoes", "Red pepper", "Onions", "Vegetable oil", "Spices"],
     instructions: "Blend tomatoes, red pepper, onions. Fry with oil and spices. Add rice and cook until done.",
-    thumbnail: "https://example.com/jollof.jpg",
+    thumbnail: jollofImg,
     videoUrl: "https://youtube.com/watch?v=mno345",
     nutrition: { calories: 500, protein: 10, carbs: 70, fats: 15 },
   },
@@ -17,7 +25,7 @@ export const westAfricanRecipes = [
     subCategory: "Dinner",
     ingredients: ["Egusi seeds", "Palm oil", "Vegetables", "Meat or fish", "Seasoning"],
     instructions: "Grind egusi seeds. Fry with palm oil and vegetables. Add meat or fish and simmer.",
-    thumbnail: "https://example.com/egusi.jpg",
+    thumbnail: egusiImg,
     videoUrl: "https://youtube.com/watch?v=pqr678",
     nutrition: { calories: 550, protein: 20, carbs: 15, fats: 45 },
   },
@@ -28,7 +36,7 @@ export const westAfricanRecipes = [
     subCategory: "Lunch",
     ingredients: ["Rice", "Black-eyed peas", "Salt", "Spinach", "Spices"],
     instructions: "Cook beans with rice and spices. Serve with boiled eggs or fried fish.",
-    thumbnail: "https://example.com/waakye.jpg",
+    thumbnail: waakyeImg,
     videoUrl: "https://youtube.com/watch?v=ghi234",
     nutrition: { calories: 520, protein: 15, carbs: 80, fats: 10 },
   },
@@ -39,7 +47,7 @@ export const westAfricanRecipes = [
     subCategory: "Dinner",
     ingredients: ["Cassava or yam flour", "Tomatoes", "Pepper", "Onions", "Meat or fish", "Seasoning"],
     instructions: "Prepare fufu with flour. Cook tomatoes, pepper, onions with meat/fish into a light soup. Serve together.",
-    thumbnail: "https://example.com/fufu-light-soup.jpg",
+    thumbnail: fufuLightSoupImg,
     videoUrl: "https://youtube.com/watch?v=stu567",
     nutrition: { calories: 600, protein: 25, carbs: 90, fats: 20 },
   },
@@ -50,7 +58,7 @@ export const westAfricanRecipes = [
     subCategory: "Snack",
     ingredients: ["Ripe plantains", "Ginger", "Garlic", "Chili pepper", "Oil for frying", "Salt"],
     instructions: "Dice plantains, marinate with spices, and deep fry until golden.",
-    thumbnail: "https://example.com/kelewele.jpg",
+    thumbnail: keleweleImg,
     videoUrl: "https://youtube.com/watch?v=vwx890",
     nutrition: { calories: 300, protein: 2, carbs: 50, fats: 12 },
   },
@@ -61,7 +69,7 @@ export const westAfricanRecipes = [
     subCategory: "Dinner",
     ingredients: ["Bitterleaf", "Palm oil", "Meat or fish", "Ground crayfish", "Onions", "Seasoning cubes"],
     instructions: "Wash and pound bitterleaf. Cook meat/fish in palm oil with crayfish and onions. Add bitterleaf and simmer.",
-    thumbnail: "https://example.com/bitterleaf.jpg",
+    thumbnail: bitterleafImg,
     videoUrl: "https://youtube.com/watch?v=yza123",
     nutrition: { calories: 450, protein: 20, carbs: 20, fats: 30 },
   }

@@ -1,15 +1,27 @@
+// src/components/RecipeCard.jsx
 import React, { useMemo, useState } from "react";
 
 function RecipeCard({ recipe }) {
   const [showDetails, setShowDetails] = useState(false);
 
   // Normalize fields across local + API data
-  const image = recipe.thumbnail || recipe.image || recipe.strMealThumb || "";
+  let image = recipe.thumbnail || recipe.image || recipe.strMealThumb || "";
   const title = recipe.name || recipe.strMeal || recipe.title || "Untitled";
   const subcategory =
-    recipe.subCategory || recipe.subcategory || recipe.strCategory || recipe.category || "Uncategorized";
+    recipe.subCategory ||
+    recipe.subcategory ||
+    recipe.strCategory ||
+    recipe.category ||
+    "Uncategorized";
   const instructions = recipe.instructions || recipe.strInstructions || "";
   const videoUrl = recipe.videoUrl || recipe.video || recipe.strYoutube || "";
+
+  // Resolve local images
+  if (image.startsWith("local-nigeria/")) {
+    image = `/images/nigeria/${image.replace("local-nigeria/", "")}`;
+  } else if (image.startsWith("local-west-africa/")) {
+    image = `/images/west-africa/${image.replace("local-west-africa/", "")}`;
+  }
 
   // Build ingredients (local array OR API strIngredient1..20 [+ optional strMeasureN])
   const ingredients = useMemo(() => {
@@ -99,9 +111,7 @@ function RecipeCard({ recipe }) {
                   {nutrition.fats != null && <li>Fats: {nutrition.fats}g</li>}
                 </ul>
               </div>
-            ) : (
-              <></>
-            )}
+            ) : null}
 
             {/* Video */}
             {videoUrl && (
