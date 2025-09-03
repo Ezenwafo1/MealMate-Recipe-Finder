@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import RecipeList from "./components/RecipeList.jsx";
+import { GiMeal } from "react-icons/gi"; // Import logo icon
 
 function App() {
   const [showNigerian, setShowNigerian] = useState(true);
@@ -9,7 +10,8 @@ function App() {
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
       {/* Gradient Header */}
-      <header className="bg-gradient-to-r from-orange-400 via-yellow-300 to-orange-500 text-white py-6 shadow-md">
+      <header className="bg-gradient-to-r from-orange-400 via-yellow-300 to-orange-500 text-white py-6 shadow-md flex items-center justify-center gap-3">
+        <GiMeal className="text-4xl sm:text-5xl" />
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center">
           MealMate Recipe Finder
         </h1>
