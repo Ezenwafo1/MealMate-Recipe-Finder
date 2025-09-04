@@ -59,14 +59,15 @@ Follow the video link to cook along
 
 Live Demo
 
-👉 View MealMate Live
+👉 View MealMate Live : https://www.linkedin.com/posts/aonwambu_after-long-journey-with-the-alxfe-finally-activity-7369420038442831876-zcG8?utm_source=share&utm_medium=member_android&rcm=ACoAACkc5h4BEz156q-7I8zDxs54MSJrG5Ee3zQ
+
 
 (Replace with your Netlify or Vercel link once deployed.)
 
 Project Presentation
 
 🎥 Watch the walkthrough of MealMate on Loom:
-👉 Presentation Video
+👉 Presentation Video -  https://www.loom.com/share/100f639f6a4346ee951df8a6fa613dd0?sid=cd80ce93-7298-436f-a8dd-65c70e2f6011
 
 (Record a 5-minute demo with Loom and paste your link here.)
 
