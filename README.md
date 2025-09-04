@@ -1,12 +1,76 @@
-# React + Vite
+MealMate Recipe Finder
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+MealMate is a recipe app built with React and Tailwind CSS.
+It helps you discover, learn, and enjoy recipes from Nigeria, West Africa, and beyond.
+Cooking should be simple, fun, and affordable — MealMate makes that possible.
 
-Currently, two official plugins are available:
+Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Browse Nigerian, West African, and International recipes
 
-## Expanding the ESLint configuration
+Search and filter by category
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+View ingredients, steps, and nutrition facts
+
+Watch cooking videos for guidance
+
+Mobile and desktop friendly
+
+Footer with social media links
+
+Tech Stack
+
+React (Vite)
+
+React Router
+
+Tailwind CSS
+
+React Icons
+
+Installation
+
+Clone the repo
+
+git clone https://github.com/your-username/mealmate-recipe-app.git
+
+
+Move into the project folder
+
+cd mealmate-recipe-app
+
+
+Install dependencies
+
+npm install
+
+
+Start the app
+
+npm run dev
+
+Usage
+
+Check boxes to switch between recipe categories
+
+Click any recipe to see details
+
+Follow the video link to cook along
+
+Live Demo
+
+👉 View MealMate Live
+
+(Replace with your Netlify or Vercel link once deployed.)
+
+Project Presentation
+
+🎥 Watch the walkthrough of MealMate on Loom:
+👉 Presentation Video
+
+(Record a 5-minute demo with Loom and paste your link here.)
+
+Author
+
+Built with ❤️ by Anthony Nwambu (Ezenwafo1)
+Powered by ALX FE Program
